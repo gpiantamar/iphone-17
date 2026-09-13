@@ -1,26 +1,23 @@
+import { useState } from "react";
 
 
-function Colors(){
+function Colors() {
 
     const colors = [
-        { id: 'blue', name: "Titânio Azul", image: "/img/iphone-blue.jpg", colorClass:'bg-blue-500' },
-        { id: 'silver', name: "Titânio Natural", image: "/img/iphone-silver.jpg", colorClass:'bg-gray-300' },
-        { id: 'orange', name: "Titânio Laranja", image: "/img/iphone-orange.jpg", colorClass:'bg-orange-500' }
+        { id: 'blue', name: "Titânio Azul", image: "/img/iphone-blue.jpg", colorClass: 'bg-blue-500' },
+        { id: 'silver', name: "Titânio Natural", image: "/img/iphone-silver.jpg", colorClass: 'bg-gray-300' },
+        { id: 'orange', name: "Titânio Laranja", image: "/img/iphone-orange.jpg", colorClass: 'bg-orange-500' }
     ];
 
     const models = [
-        {id: 'Pro Max', name: '6.9 polegadas', storage: '256GB, 512GB ou 1TB', battery: '33h de vídeo', weight: '221g'},
-        {id: 'Pro', name: '6.3 polegadas', storage: '256GB, 512GB ou 1TB', battery: '29h de vídeo', weight: '199g'},
+        { id: 'Pro Max', name: 'iPhone 17 Pro Max', screen: '6.9 polegadas', storage: '256GB, 512GB ou 1TB', battery: '33h de vídeo', weight: '221g' },
+        { id: 'Pro', name: 'iPhone 17 Pro', screen: '6.3 polegadas', storage: '256GB, 512GB ou 1TB', battery: '29h de vídeo', weight: '199g' },
     ];
 
-    let nome = 'Rodolfo'
 
-    function trocaNome(){
-        nome = 'Guilherme'
-        console.log('Nome')
-    }
+    const [selectedColor, setSelectedColor] = useState('blue');
 
-    return(
+    return (
         <section id="colors" className="bg-black py-20 px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
@@ -28,9 +25,51 @@ function Colors(){
                     <p className="text-xl text-gray-400">Explore as cores deslumbrantes do iPhone 17 Pro.</p>
                 </div>
 
-                <button onClick={trocaNome} className="bg-red-400">Mude o nome</button>
+                <div className="flex justify-center mb-12">
+                    <div className="relative w-full max-w-3xl">
+                        <div className="relative flex items-center justify-center min-h-[550px]">
+                            <img src={colors.find(color => color.id === selectedColor).image} alt="iPhone 17 Pro" className="max-w-full max-h-[600px] mx-auto" />
+                        </div>
 
-                <p>{nome}</p>
+                        <div className="absolute bottom-8 left-0 right-0 text-center">
+                            <div className="px-8 py-4 rounded-full backdrop-blur-md bg-black/40 inline-block">
+                                <h3 className="text-2xl font-semibold">{colors.find(color => color.id === selectedColor).name}</h3>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div className="flex items-center justify-center gap-4">
+                    {colors.map(color => (
+                        <button key={color.id} onClick={() => setSelectedColor(color.id)} className={`relative transition-all duration-300 cursor-pointer`}>
+                            <div className={`w-16 h-16 border-4 rounded-full ${color.colorClass} ${selectedColor === color.id ? 'border-white' : 'border-gray-600'}`}></div>
+                        </button>
+                    ))}
+                </div>
+                <div className="grid gap-8 mt-20 grid-cols-2">
+                    {models.map((model, index) => (
+                        <div key={index} className="bg-gradient-to-br from-gray-900 to-transparent rounded-3xl p-8 border border-gray-800">
+                            <div className="text-4xl mb-4">📱</div>
+                            <h3 className="text-2xl font-bold mb-3">{model.name}</h3>
+                            <p className="text-gray-400 mb-4">{model.screen}</p>
+                            <ul className="space-y-2 text-gray-300">
+                                <li>{model.storage}</li>
+                                <li>{model.battery}</li>
+                                <li>{model.weight}</li>
+                            </ul>
+                        </div>                            
+                    ))}
+                </div>
+
+                <div className="mt-16 text-center">
+                    <button className="bg-blue-700 text-white font-medium transition duration-300 py-4 px-12 rounded-full hover:bg-blue-800 hover:scale-105 shadow-md hover:shadow-xl cursor-pointer">
+                        Compre agora a partir de R$ 9.950,00
+                    </button>
+                    <p className="text-gray-400 text-sm mt-4">ou até 12x de R$ 994,90 sem juros</p>
+                </div>
             </div>
         </section>
     )
