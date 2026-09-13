@@ -25,7 +25,7 @@ function Colors(){
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-5xl mb:text-6xl font-bold mb-4"> Escolha sua cor</h2>
-                    <p className="text-xl text-gray-400">Explore as cores deslumbrantes do iPhone 18 Pro.</p>
+                    <p className="text-xl text-gray-400">Explore as cores deslumbrantes do iPhone 17 Pro.</p>
                 </div>
 
                 <button onClick={trocaNome} className="bg-red-400">Mude o nome</button>
